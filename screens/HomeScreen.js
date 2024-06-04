@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -8,7 +8,6 @@ import {
   ScrollView,
   StatusBar,
   FlatList,
-  Animated,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import {
@@ -17,10 +16,10 @@ import {
   popularMovies,
   baseImagePath,
 } from "../api/MovieApi";
-import InputHeader from "../components/InputHeader";
 import CategoryHeader from "../components/CategoryHeader";
 import SubMovieCard from "../components/SubMovieCard";
 import MovieCard from "../components/MovieCard";
+import { Ionicons } from "@expo/vector-icons"; 
 
 const { width } = Dimensions.get("window");
 
@@ -69,7 +68,6 @@ const HomeScreen = ({ navigation }) => {
   const [upcomingMoviesList, setUpcomingMoviesList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const shakeAnimation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -95,47 +93,14 @@ const HomeScreen = ({ navigation }) => {
     };
 
     fetchData();
-    startShake();
   }, []);
-
-  const startShake = () => {
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(shakeAnimation, {
-          toValue: 10,
-          duration: 100,
-          useNativeDriver: true,
-        }),
-        Animated.timing(shakeAnimation, {
-          toValue: -10,
-          duration: 100,
-          useNativeDriver: true,
-        }),
-        Animated.timing(shakeAnimation, {
-          toValue: 10,
-          duration: 100,
-          useNativeDriver: true,
-        }),
-        Animated.timing(shakeAnimation, {
-          toValue: 0,
-          duration: 100,
-          useNativeDriver: true,
-        }),
-      ])
-    ).start();
-  };
 
   const searchMoviesFunction = () => {
     navigation.navigate("Search");
   };
 
   const renderTitle = () => (
-    <Animated.View
-      style={[
-        styles.titleContainer,
-        { transform: [{ translateX: shakeAnimation }] },
-      ]}
-    >
+    <View style={styles.titleContainer}>
       <Text style={styles.title}>
         <Text style={{ color: "#FF512F" }}>M</Text>
         <Text style={{ color: "#DD2476" }}>o</Text>
@@ -144,7 +109,7 @@ const HomeScreen = ({ navigation }) => {
         <Text style={{ color: "#FF512F" }}>e</Text>
         <Text style={{ color: "#DD2476" }}>s</Text>
       </Text>
-    </Animated.View>
+    </View>
   );
 
   if (loading) {
@@ -156,9 +121,24 @@ const HomeScreen = ({ navigation }) => {
           contentContainerStyle={styles.scrollViewContainer}
         >
           <StatusBar hidden />
-          <View style={styles.InputHeaderContainer}>
-            {renderTitle()}
-            <InputHeader searchFunction={searchMoviesFunction} />
+          <View style={styles.headerContainer}>
+            <View style={styles.titleWrapper}>{renderTitle()}</View>
+            <View style={styles.iconContainer}>
+              <Ionicons
+                name="search"
+                size={30}
+                color="white"
+                onPress={searchMoviesFunction}
+                style={styles.icon}
+              />
+              <Ionicons
+                name="notifications"
+                size={30}
+                color="white"
+                onPress={() => alert('Bell icon pressed')}
+                style={styles.icon}
+              />
+            </View>
           </View>
           <View style={styles.loadingContainer}>
             <ActivityIndicator size={"large"} color={"orange"} />
@@ -177,9 +157,24 @@ const HomeScreen = ({ navigation }) => {
           contentContainerStyle={styles.scrollViewContainer}
         >
           <StatusBar hidden />
-          <View style={styles.InputHeaderContainer}>
-            {renderTitle()}
-            <InputHeader searchFunction={searchMoviesFunction} />
+          <View style={styles.headerContainer}>
+            <View style={styles.titleWrapper}>{renderTitle()}</View>
+            <View style={styles.iconContainer}>
+              <Ionicons
+                name="search"
+                size={30}
+                color="white"
+                onPress={searchMoviesFunction}
+                style={styles.icon}
+              />
+              <Ionicons
+                name="notifications"
+                size={30}
+                color="white"
+                onPress={() => alert('Bell icon pressed')}
+                style={styles.icon}
+              />
+            </View>
           </View>
           <View style={styles.errorContainer}>
             <Text style={styles.errorText}>{error}</Text>
@@ -205,9 +200,24 @@ const HomeScreen = ({ navigation }) => {
         contentContainerStyle={styles.scrollViewContainer}
       >
         <StatusBar hidden />
-        <View style={styles.InputHeaderContainer}>
-          {renderTitle()}
-          <InputHeader searchFunction={searchMoviesFunction} />
+        <View style={styles.headerContainer}>
+          <View style={styles.titleWrapper}>{renderTitle()}</View>
+          <View style={styles.iconContainer}>
+            <Ionicons
+              name="search"
+              size={30}
+              color="white"
+              onPress={searchMoviesFunction}
+              style={styles.icon}
+            />
+            <Ionicons
+              name="notifications"
+              size={30}
+              color="white"
+              onPress={() => alert('Bell icon pressed')}
+              style={styles.icon}
+            />
+          </View>
         </View>
         <View style={styles.loadingContainer}>
           <ActivityIndicator size={"large"} color={"orange"} />
@@ -218,11 +228,25 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <ScrollView style={styles.container} bounces={false}>
-      <View>{renderTitle()}</View>
       <StatusBar hidden />
-
-      <View style={styles.InputHeaderContainer}>
-        <InputHeader searchFunction={searchMoviesFunction} />
+      <View style={styles.headerContainer}>
+        <View style={styles.titleWrapper}>{renderTitle()}</View>
+        <View style={styles.iconContainer}>
+          <Ionicons
+            name="search"
+            size={30}
+            color="white"
+            onPress={searchMoviesFunction}
+            style={styles.icon}
+          />
+          <Ionicons
+            name="notifications"
+            size={30}
+            color="white"
+            onPress={() => alert('Bell icon pressed')}
+            style={styles.icon}
+          />
+        </View>
       </View>
 
       <CategoryHeader title={"Now Playing"} style={styles.categoryHeader} />
@@ -331,9 +355,16 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
   },
-  InputHeaderContainer: {
+  headerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginHorizontal: 36,
     marginTop: 5,
+  },
+  titleWrapper: {
+    flex: 1,
+    alignItems: "center",
   },
   containerGap36: {
     gap: 36,
@@ -346,12 +377,17 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 28,
     fontWeight: "bold",
-    marginVertical: 10,
     textAlign: "center",
     fontFamily: "sans-serif-medium",
     textShadowColor: "rgba(0, 0, 0, 0.75)",
     textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10,
+  },
+  iconContainer: {
+    flexDirection: "row",
+  },
+  icon: {
+    marginLeft: 20,
   },
   errorContainer: {
     flex: 1,
