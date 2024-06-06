@@ -1,13 +1,22 @@
-import React from 'react';
-import { Text, View, StyleSheet, StatusBar, Image, ScrollView } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import AppHeader from '../components/AppHeader';
-import SettingComponent from '../components/SettingComponent';
+import React from "react";
+import {
+  Text,
+  View,
+  StyleSheet,
+  StatusBar,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import AppHeader from "../components/AppHeader";
+import SettingComponent from "../components/SettingComponent";
+import { Linking } from "react-native";
 
 const UserAccountScreen = ({ navigation }) => {
   return (
     <LinearGradient
-      colors={['#4c669f', '#3b5998', '#192f6a']}
+      colors={["#4c669f", "#3b5998", "#192f6a"]}
       style={styles.container}
     >
       <StatusBar hidden />
@@ -22,7 +31,7 @@ const UserAccountScreen = ({ navigation }) => {
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.profileContainer}>
           <Image
-            source={require('../assets/image/avatar.png')}
+            source={require("../assets/image/avatar.png")}
             style={styles.avatarImage}
           />
           <Text style={styles.avatarText}>Minh Khôi</Text>
@@ -47,12 +56,14 @@ const UserAccountScreen = ({ navigation }) => {
             subheading="Offer"
             subtitle="Referrals"
           />
-          <SettingComponent
-            icon="info"
-            heading="About"
-            subheading="About Movies"
-            subtitle="More"
-          />
+          <TouchableOpacity onPress={() => Linking.openURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ')}>
+            <SettingComponent
+              icon="info"
+              heading="About"
+              subheading="About Movies"
+              subtitle="More"
+            />
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </LinearGradient>
@@ -71,7 +82,7 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
   },
   profileContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     paddingVertical: 30,
   },
   avatarImage: {
@@ -79,20 +90,20 @@ const styles = StyleSheet.create({
     width: 120,
     borderRadius: 60,
     borderWidth: 2,
-    borderColor: 'white',
+    borderColor: "white",
     marginBottom: 20,
   },
   avatarText: {
-    fontFamily: 'sans-serif-medium',
+    fontFamily: "sans-serif-medium",
     fontSize: 24,
     marginTop: 16,
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
   settingsContainer: {
     padding: 15,
     marginTop: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
     borderRadius: 20,
   },
 });

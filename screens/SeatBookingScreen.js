@@ -164,19 +164,19 @@ const SeatBookingScreen = ({ navigation, route }) => {
 
         <View style={styles.seatRadioContainer}>
           <View style={styles.radioContainer}>
-            <MaterialIcons name="check-circle" style={styles.radioIcon} />
+            <MaterialIcons name="chair" style={styles.radioIcon} />
             <Text style={styles.radioText}>Available</Text>
           </View>
           <View style={styles.radioContainer}>
             <MaterialIcons
-              name="radio-button-unchecked"
+              name="chair"
               style={[styles.radioIcon, { color: "#808080" }]}
             />
             <Text style={styles.radioText}>Taken</Text>
           </View>
           <View style={styles.radioContainer}>
             <MaterialIcons
-              name="radio-button-checked"
+              name="chair"
               style={[styles.radioIcon, { color: "#FFA500" }]}
             />
             <Text style={styles.radioText}>Selected</Text>
@@ -312,8 +312,8 @@ const styles = StyleSheet.create({
   },
   seatRadioContainer: {
     flexDirection: "row",
-    marginTop: 36,
-    marginBottom: 10,
+    marginTop: 5,
+    marginBottom: 20,
     alignItems: "center",
     justifyContent: "space-evenly",
   },
