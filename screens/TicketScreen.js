@@ -53,18 +53,6 @@ const TicketScreen = ({ navigation, route }) => {
             source={{ uri: ticketData?.ticketImage }}
             style={styles.ticketBGImage}
           >
-            <View
-              style={[
-                styles.blackCircle,
-                { position: "absolute", top: 410, left: -40 },
-              ]}
-            ></View>
-            <View
-              style={[
-                styles.blackCircle,
-                { position: "absolute", top: 410, right: -40 },
-              ]}
-            ></View>
           </ImageBackground>
         </LinearGradient>
         <View style={styles.linear}></View>
@@ -130,18 +118,18 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
   },
   appHeaderContainer: {
-    marginHorizontal: 1,
-    marginBottom: 22,
+    marginHorizontal: 10,
+    marginBottom: 10,
   },
   ticketContainer: {
     flex: 1,
     justifyContent: "center",
-    marginBottom: 65,
+    marginBottom: 10,
   },
   ticketBGImage: {
     alignSelf: "center",
-    width: 300,
-    aspectRatio: 200 / 300,
+    width: 280,
+    aspectRatio: 200 / 280,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     overflow: "hidden",
@@ -150,13 +138,13 @@ const styles = StyleSheet.create({
   linear: {
     borderTopColor: "black",
     borderTopWidth: 3,
-    width: 300,
+    width: 280,
     alignSelf: "center",
     backgroundColor: "orange",
     borderStyle: "dashed",
   },
   ticketFooter: {
-    width: 300,
+    width: 280,
     alignItems: "center",
     paddingBottom: 36,
     alignSelf: "center",
